@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 — Your Job Future (Simple Present &amp; Verb + Infinitive)</title>
+<style>
+  :root{
+    --navy:#0b1f3a;
+    --navy2:#122a4d;
+    --sky:#1ea7e8;
+    --amber:#f5a623;
+    --green:#28c76f;
+    --red:#ea5455;
+    --ink:#122036;
+    --paper:#f4f8fc;
+    --card:#ffffff;
+    --muted:#6b7c93;
+    --radius:16px;
+    --shadow:0 8px 24px rgba(11,31,58,0.12);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);}
+  body{min-height:100vh;}
+  header.topbar{background:linear-gradient(135deg,var(--navy) 0%, var(--navy2) 100%);color:#fff;padding:16px 18px 12px;position:sticky;top:0;z-index:50;box-shadow:0 4px 18px rgba(0,0,0,.25);}
+  .topbar-inner{max-width:1150px;margin:0 auto;}
+  .badge{display:inline-block;background:var(--sky);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;padding:5px 12px;border-radius:20px;text-transform:uppercase;margin-bottom:8px;}
+  header.topbar h1{margin:0 0 4px;font-size:clamp(18px,3.6vw,26px);}
+  header.topbar p{margin:0 0 12px;color:#b9c8de;font-size:13px;}
+  nav.phasenav{display:flex;gap:6px;flex-wrap:wrap;}
+  nav.phasenav button{flex:1 1 100px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:#dce6f5;padding:8px 6px;border-radius:10px;font-size:10.5px;font-weight:600;cursor:pointer;transition:.2s;text-align:center;}
+  nav.phasenav button .num{display:block;font-size:9px;font-weight:800;color:var(--amber);letter-spacing:1px;margin-bottom:2px;}
+  nav.phasenav button.active{background:var(--sky);border-color:var(--sky);color:#fff;}
+  nav.phasenav button:hover:not(.active){background:rgba(255,255,255,0.16);}
+  .progress-outer{height:6px;background:rgba(255,255,255,0.15);border-radius:6px;margin-top:10px;overflow:hidden;}
+  .progress-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--sky),var(--amber));transition:width .4s ease;}
+  main{max-width:1150px;margin:0 auto;padding:26px 18px 70px;}
+  .phase{display:none;animation:fadeIn .4s ease;}
+  .phase.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+  .phase-title{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .phase-title .bar{width:5px;height:26px;background:var(--sky);border-radius:3px;}
+  .phase-title h2{margin:0;font-size:clamp(19px,3.2vw,25px);}
+  .phase-sub{color:var(--muted);margin:0 0 22px;font-size:14.5px;max-width:760px;}
+  .word-dots{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;max-height:200px;overflow-y:auto;padding:4px;}
+  .word-dot{width:32px;height:32px;border-radius:50%;background:#e2ebf3;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;cursor:pointer;border:2px solid transparent;flex-shrink:0;}
+  .word-dot.active{background:var(--sky);color:#fff;border-color:var(--sky);}
+  .word-dot.done{background:var(--green);color:#fff;}
+  .word-dot.failed{background:var(--red);color:#fff;}
+  .stepper-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 24px;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:680px;margin:0 auto;border:1px solid #e2ebf3;}
+  .step-tags{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;justify-content:center;}
+  .step-tag{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:800;letter-spacing:.5px;background:#eef4fb;color:var(--muted);}
+  .step-tag.on{background:var(--sky);color:#fff;}
+  .stepper-image{width:260px;height:260px;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#eaf4fc,#dff0fb);border-radius:20px;margin-bottom:18px;overflow:hidden;box-shadow:0 4px 12px rgba(11,31,58,0.08);border:1px solid #e2ebf3;}
+  .stepper-image svg{width:100%;height:100%;}
+  .stepper-text{font-size:clamp(15px,2.7vw,22px);font-weight:800;color:var(--navy);margin-bottom:6px;min-height:36px;line-height:1.35;}
+  .stepper-hint{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;}
+  .stepper-controls{display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap;justify-content:center;}
+  .stepper-controls .speak-btn{width:48px;height:48px;font-size:20px;}
+  .nav-btn{background:var(--navy);color:#fff;border:none;padding:10px 18px;border-radius:10px;font-weight:700;cursor:pointer;font-size:13px;transition:.15s;}
+  .nav-btn:hover{background:var(--sky);}
+  .nav-btn.ghost{background:#eef4fb;color:var(--navy);}
+  .nav-btn.ghost:hover{background:#dfeaf6;}
+  .nav-btn:disabled{opacity:.35;cursor:not-allowed;}
+  .speak-btn{background:var(--sky);border:none;color:#fff;width:40px;height:40px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;flex-shrink:0;transition:.15s;}
+  .speak-btn:hover{background:var(--navy);}
+  .speak-btn.big{width:56px;height:56px;font-size:24px;}
+  .mic-btn{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;border:none;font-size:24px;cursor:pointer;box-shadow:0 6px 18px rgba(234,84,85,.35);transition:.15s;}
+  .mic-btn:hover{transform:scale(1.06);}
+  .mic-btn.listening{animation:pulseMic 1s infinite;background:#c53030;}
+  .mic-btn.small{width:44px;height:44px;font-size:18px;box-shadow:0 4px 12px rgba(234,84,85,.3);}
+  @keyframes pulseMic{0%{box-shadow:0 0 0 0 rgba(234,84,85,.6);}70%{box-shadow:0 0 0 20px rgba(234,84,85,0);}100%{box-shadow:0 0 0 0 rgba(234,84,85,0);}}
+  .sp-transcript{min-height:24px;font-size:13px;color:var(--muted);font-style:italic;margin:8px 0;}
+  .sp-feedback{font-weight:800;font-size:14px;min-height:22px;}
+  .sp-feedback.ok{color:var(--green);}
+  .sp-feedback.bad{color:var(--red);}
+  .listen-click-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 24px;text-align:center;max-width:1000px;margin:0 auto;border:1px solid #e2ebf3;}
+  .lc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
+  .lc-round{font-size:13px;font-weight:800;color:var(--muted);letter-spacing:.5px;}
+  .lc-score-box{display:flex;gap:16px;align-items:center;background:#eef4fb;padding:8px 18px;border-radius:20px;}
+  .lc-score-box span{font-weight:800;}
+  .lc-score-box .good{color:var(--green);}
+  .lc-score-box .bad{color:var(--red);}
+  .lc-big-speak{width:90px;height:90px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:38px;cursor:pointer;box-shadow:0 8px 22px rgba(11,31,58,.35);transition:.15s;margin:10px 0 12px;}
+  .lc-big-speak:hover{transform:scale(1.08);background:var(--sky);}
+  .lc-big-speak.pulsing{animation:pulse 1s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(30,167,232,.5);}70%{box-shadow:0 0 0 18px rgba(30,167,232,0);}100%{box-shadow:0 0 0 0 rgba(30,167,232,0);}}
+  .lc-instruction{font-size:15px;color:var(--navy);font-weight:700;margin-bottom:8px;}
+  .lc-subinstruction{font-size:13px;color:var(--muted);font-weight:600;margin-bottom:22px;}
+  .lc-images{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:12px;}
+  .lc-img-card{background:#f7fafd;border:3px solid #e2ebf3;border-radius:16px;padding:6px 6px 38px 6px;cursor:pointer;transition:.15s;aspect-ratio:1.1;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;}
+  .lc-img-card svg{width:100%;height:100%;max-height:140px;}
+  .lc-img-card:hover{border-color:var(--sky);transform:scale(1.03);}
+  .lc-img-card.correct{border-color:var(--green);background:#e8f9ee;animation:pop .4s ease;box-shadow:0 0 0 4px rgba(40,199,111,.25);}
+  .lc-img-card.wrong{border-color:var(--red);background:#fdecec;animation:shake .4s ease;}
+  @keyframes pop{0%{transform:scale(1);}50%{transform:scale(1.08);}100%{transform:scale(1);}}
+  @keyframes shake{0%,100%{transform:translateX(0);}25%{transform:translateX(-8px);}75%{transform:translateX(8px);}}
+  .lc-img-label{position:absolute;bottom:0;left:0;right:0;background:var(--navy);color:#fff;font-size:10.5px;font-weight:800;letter-spacing:.3px;padding:6px 6px;text-align:center;border-bottom-left-radius:13px;border-bottom-right-radius:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .lc-img-card.correct .lc-img-label{background:var(--green);}
+  .lc-img-card.wrong .lc-img-label{background:var(--red);}
+  .lc-feedback{margin-top:20px;font-weight:800;font-size:15px;min-height:26px;}
+  .lc-feedback.ok{color:var(--green);}
+  .lc-feedback.bad{color:var(--red);}
+  .lc-complete{text-align:center;padding:30px 20px;}
+  .lc-complete h3{font-size:24px;margin:0 0 10px;}
+  .lc-complete .score-big{font-size:52px;font-weight:900;color:var(--sky);margin:10px 0;}
+  .lc-complete .score-sub{color:var(--muted);font-size:14px;margin-bottom:20px;}
+  .lc-complete.pass h3{color:var(--green);}
+  .lc-complete.fail h3{color:var(--red);}
+  .fb-progress{height:10px;background:#e2ebf3;border-radius:8px;overflow:hidden;margin-bottom:22px;}
+  .fb-progress-inner{height:100%;width:0%;background:linear-gradient(90deg,var(--sky),var(--green));transition:.4s;}
+  .fb-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;max-width:780px;margin:0 auto;border:1px solid #e2ebf3;}
+  .fb-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:6px;}
+  .fb-num{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.5px;}
+  .fb-score{font-size:13px;font-weight:800;color:var(--green);}
+  .fb-sentence{font-size:16px;font-weight:700;color:var(--ink);line-height:1.5;margin-bottom:18px;}
+  .fb-sentence .gap{display:inline-block;min-width:100px;border-bottom:3px solid var(--amber);text-align:center;color:var(--amber);}
+  .fb-sentence .tense-tag{display:inline-block;font-size:10px;font-weight:800;color:var(--sky);background:#eef4fb;padding:2px 8px;border-radius:8px;margin-left:6px;text-transform:uppercase;letter-spacing:.5px;vertical-align:middle;}
+  .fb-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;}
+  .fb-choice{background:#f7fafd;border:2px solid #e2ebf3;border-radius:12px;padding:12px;font-weight:700;font-size:13px;cursor:pointer;text-align:center;transition:.15s;}
+  .fb-choice:hover{border-color:var(--sky);}
+  .fb-choice.correct{background:#e8f9ee;border-color:var(--green);color:#1c8a4d;animation:pop .3s ease;}
+  .fb-choice.wrong{background:#fdecec;border-color:var(--red);color:#c53030;animation:shake .3s ease;}
+  .fb-feedback{margin-top:16px;font-weight:700;font-size:14px;min-height:20px;}
+  .fb-feedback.ok{color:var(--green);}
+  .fb-feedback.bad{color:var(--red);}
+  .match-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0;}
+  .match-item{background:#f7fafd;border:2px solid #e2ebf3;border-radius:12px;padding:14px 12px;cursor:pointer;transition:.15s;font-weight:600;font-size:13px;text-align:center;min-height:50px;display:flex;align-items:center;justify-content:center;line-height:1.35;}
+  .match-item:hover{border-color:var(--sky);}
+  .match-item.selected{background:var(--sky);color:#fff;border-color:var(--sky);}
+  .match-item.matched{background:#e8f9ee;border-color:var(--green);color:#1c8a4d;cursor:default;}
+  .match-item.wrong-match{background:#fdecec;border-color:var(--red);color:#c53030;animation:shake .3s ease;}
+  .match-item .m-icon{font-size:16px;margin-right:6px;flex-shrink:0;}
+  .match-item.def-item{font-size:12px;font-weight:500;text-align:left;justify-content:flex-start;}
+  .match-pair-status{font-weight:700;font-size:14px;min-height:24px;margin-top:12px;}
+  .listen-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 22px;text-align:center;max-width:820px;margin:0 auto;border:1px solid #e2ebf3;}
+  .listen-count{color:var(--muted);font-size:13px;margin-bottom:6px;font-weight:600;}
+  .context-card{background:#eef4fb;border-left:4px solid var(--sky);border-radius:8px;padding:12px 16px;margin-bottom:18px;text-align:left;font-size:13px;color:var(--navy);font-weight:600;}
+  .context-card strong{color:var(--navy2);display:block;margin-bottom:4px;font-size:11px;text-transform:uppercase;letter-spacing:.5px;}
+  .big-speak{width:90px;height:90px;border-radius:50%;background:var(--navy);color:#fff;border:none;font-size:36px;cursor:pointer;box-shadow:0 6px 18px rgba(11,31,58,.35);transition:.15s;margin:6px 0 18px;}
+  .big-speak:hover{transform:scale(1.06);background:var(--sky);}
+  .big-speak.pulsing{animation:pulse 1s infinite;}
+  .listen-question{background:#eef4fb;border-radius:12px;padding:16px 20px;margin:0 auto 18px;max-width:640px;font-size:16px;font-weight:800;color:var(--navy);text-align:center;line-height:1.4;}
+  .listen-question .q-tag{display:block;font-size:10.5px;color:var(--sky);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-weight:800;}
+  .listen-options{display:grid;grid-template-columns:1fr;gap:10px;margin-top:6px;}
+  .listen-opt{background:#f7fafd;border:2px solid #e2ebf3;border-radius:14px;padding:14px 18px;cursor:pointer;transition:.15s;display:flex;align-items:center;gap:12px;font-weight:600;font-size:14px;text-align:left;line-height:1.4;}
+  .listen-opt:hover{border-color:var(--sky);background:#eef7fd;}
+  .listen-opt .lo-letter{display:inline-flex;align-items:center;justify-content:center;min-width:30px;height:30px;background:var(--navy);color:#fff;border-radius:50%;font-weight:800;font-size:13px;flex-shrink:0;}
+  .listen-opt.correct{background:#e8f9ee;border-color:var(--green);animation:pop .3s ease;}
+  .listen-opt.correct .lo-letter{background:var(--green);}
+  .listen-opt.wrong{background:#fdecec;border-color:var(--red);animation:shake .3s ease;}
+  .listen-opt.wrong .lo-letter{background:var(--red);}
+  .listen-footer{margin-top:22px;display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+  .score-pill{display:inline-flex;gap:10px;align-items:center;background:#eef4fb;padding:8px 18px;border-radius:20px;font-weight:700;font-size:13px;color:var(--navy);}
+  .sp-wrap{max-width:780px;margin:0 auto;}
+  .sp-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;text-align:center;border:1px solid #e2ebf3;}
+  .sp-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:6px;}
+  .sp-num{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.5px;}
+  .sp-score{font-size:13px;font-weight:800;color:var(--green);}
+  .sp-target{font-size:clamp(15px,2.5vw,20px);font-weight:800;color:var(--navy);margin:14px 0 6px;line-height:1.5;}
+  .sp-hint{color:var(--muted);font-size:13px;margin-bottom:16px;}
+  .sp-controls{display:flex;justify-content:center;gap:14px;align-items:center;margin-bottom:12px;flex-wrap:wrap;}
+  .sp-next{margin-top:16px;background:var(--navy);color:#fff;border:none;padding:11px 22px;border-radius:10px;font-weight:700;cursor:pointer;display:none;}
+  .sp-next.show{display:inline-block;}
+  .sp-unsupported{background:#fff6e6;color:#8a6300;border-radius:12px;padding:14px;font-size:13px;font-weight:600;margin-top:10px;}
+  .read-panel{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:30px 26px;max-width:820px;margin:0 auto;border:1px solid #e2ebf3;}
+  .read-passage{background:#eef4fb;border-left:5px solid var(--sky);border-radius:10px;padding:20px 22px;margin-bottom:24px;font-size:15px;line-height:1.65;color:var(--ink);}
+  .read-q{margin-bottom:20px;padding-bottom:18px;border-bottom:1px solid #e2ebf3;}
+  .read-q:last-of-type{border-bottom:none;}
+  .read-q-text{font-weight:800;font-size:15px;color:var(--navy);margin-bottom:12px;line-height:1.4;}
+  .read-opts{display:grid;gap:8px;}
+  .read-opt{background:#f7fafd;border:2px solid #e2ebf3;border-radius:10px;padding:11px 14px;cursor:pointer;font-size:13.5px;font-weight:600;transition:.15s;}
+  .read-opt:hover{border-color:var(--sky);background:#eef7fd;}
+  .read-opt.correct{background:#e8f9ee;border-color:var(--green);color:#1c8a4d;}
+  .read-opt.wrong{background:#fdecec;border-color:var(--red);color:#c53030;animation:shake .3s ease;}
+  .read-opt.disabled{pointer-events:none;opacity:0.85;}
+  .read-score-bar{background:#eef4fb;padding:12px 18px;border-radius:10px;display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;color:var(--navy);margin-bottom:20px;flex-wrap:wrap;gap:8px;}
+  .read-score-bar .good{color:var(--green);}
+  .read-score-bar .bad{color:var(--red);}
+  .final-wrap{max-width:750px;margin:0 auto;text-align:center;}
+  .final-card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:36px 24px;border:1px solid #e2ebf3;}
+  .final-card h3{font-size:24px;color:var(--navy);margin:0 0 4px;}
+  .final-score-big{font-size:64px;font-weight:900;color:var(--sky);margin-bottom:4px;}
+  .final-score-sub{color:var(--muted);font-size:13px;margin-bottom:20px;}
+  .final-breakdown{display:flex;flex-direction:column;gap:12px;text-align:left;margin-bottom:20px;}
+  .fb-row{display:flex;align-items:center;gap:12px;}
+  .fb-row .fb-label{width:150px;font-size:13px;font-weight:700;color:var(--ink);flex-shrink:0;}
+  .fb-row .fb-bar-outer{flex:1;height:10px;background:#e2ebf3;border-radius:6px;overflow:hidden;}
+  .fb-row .fb-bar-inner{height:100%;background:linear-gradient(90deg,var(--sky),var(--green));border-radius:6px;}
+  .fb-row .fb-val{width:52px;text-align:right;font-size:12.5px;font-weight:800;color:var(--muted);}
+  .final-message{background:#eef4fb;border-left:5px solid var(--sky);border-radius:10px;padding:16px;margin:20px 0;text-align:left;font-size:14px;color:var(--navy);font-weight:600;}
+  .final-message.pass{background:#e8f9ee;border-color:var(--green);}
+  .final-message.fail{background:#fdecec;border-color:var(--red);}
+  .restart-btn{background:var(--amber);border:none;color:#3a2600;padding:13px 28px;border-radius:10px;font-weight:800;cursor:pointer;font-size:14.5px;margin-top:10px;}
+  .restart-btn.secondary{background:var(--navy);color:#fff;margin-left:10px;}
+  footer.bottom{text-align:center;color:var(--muted);font-size:12px;padding:20px;}
+  footer.bottom span{color:var(--sky);font-weight:700;}
+  .tenses-banner{background:#eef4fb;border:1px dashed #b9c8de;border-radius:10px;padding:12px 18px;margin-bottom:20px;font-size:12.5px;color:var(--navy);font-weight:600;text-align:center;}
+  .tenses-banner strong{color:var(--sky);}
+  @media(max-width:700px){
+    .lc-images{grid-template-columns:1fr;}
+    .match-grid{grid-template-columns:1fr;}
+    nav.phasenav{gap:5px;}
+    nav.phasenav button{font-size:9.5px;padding:7px 4px;}
+    .fb-choices{grid-template-columns:1fr 1fr;}
+    .listen-options{grid-template-columns:1fr;}
+    .final-breakdown .fb-row{flex-wrap:wrap;}
+    .fb-row .fb-label{width:100%;}
+    .word-dots{max-height:150px;}
+    .stepper-image{width:200px;height:200px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="badge">ESL · Level 1 · Unit 2 — Your Job Future</span>
+    <h1>Unit 2 — Your Job Future</h1>
+    <p>Simple Present &amp; Verb + Infinitive · Job Satisfaction &amp; 21st-Century Careers</p>
+    <nav class="phasenav" id="phaseNav">
+      <button class="phase-btn active" data-phase="1"><span class="num">SECTION 1</span>Core Words</button>
+      <button class="phase-btn" data-phase="2"><span class="num">SECTION 2</span>Match</button>
+      <button class="phase-btn" data-phase="3"><span class="num">SECTION 3</span>Listen &amp; Click</button>
+      <button class="phase-btn" data-phase="4"><span class="num">SECTION 4</span>Listen &amp; Answer</button>
+      <button class="phase-btn" data-phase="5"><span class="num">SECTION 5</span>Fill Blank</button>
+      <button class="phase-btn" data-phase="6"><span class="num">SECTION 6</span>Speak</button>
+      <button class="phase-btn" data-phase="7"><span class="num">SECTION 7</span>Reading</button>
+      <button class="phase-btn" data-phase="8"><span class="num">SECTION 8</span>Final Note</button>
+    </nav>
+    <div class="progress-outer"><div class="progress-inner" id="topProgress"></div></div>
+  </div>
+</header>
+
+<main>
+  <section class="phase active" id="phase1">
+    <div class="phase-title"><span class="bar"></span><h2>Core Words — Jobs &amp; Careers</h2></div>
+    <p class="phase-sub">20 palabras clave de la Unidad 2: empleo, satisfacción laboral y carreras del siglo XXI.</p>
+    <div class="tenses-banner">
+      📚 <strong>Grammar Focus:</strong> Simple Present (he/she/it + -s/-es) &amp; Verb + Infinitive (want/need/hope + to + verb)
+    </div>
+    <div class="word-dots" id="wordDots"></div>
+    <div class="stepper-card">
+      <div class="step-tags">
+        <div class="step-tag" id="tag1">1 · Word</div>
+        <div class="step-tag" id="tag2">2 · Structure</div>
+        <div class="step-tag" id="tag3">3 · Sentence</div>
+      </div>
+      <div class="stepper-image" id="stepImage"></div>
+      <div class="stepper-hint" id="stepHint">STEP 1 — LEARN THE WORD</div>
+      <div class="stepper-text" id="stepText"></div>
+      <div class="stepper-controls">
+        <button class="nav-btn ghost" id="prevStepBtn">← Back</button>
+        <button class="speak-btn" id="stepSpeakBtn">🔊</button>
+        <button class="mic-btn small" id="stepMicBtn">🎙️</button>
+        <button class="nav-btn" id="nextStepBtn">Next →</button>
+      </div>
+      <div class="sp-transcript" id="stepTranscript">&nbsp;</div>
+      <div class="sp-feedback" id="stepFeedback">&nbsp;</div>
+      <div style="margin-top:14px;font-size:13px;font-weight:600;color:var(--muted);">
+        ✅ Aciertos: <span id="wordCorrect">0</span> &nbsp;|&nbsp; ❌ Fallos: <span id="wordWrong">0</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase" id="phase2">
+    <div class="phase-title"><span class="bar"></span><h2>Match the Pair — Word ↔ Definition</h2></div>
+    <p class="phase-sub">Match each job-related term with its definition.</p>
+    <div class="fb-progress"><div class="fb-progress-inner" id="matchProgress"></div></div>
+    <div id="matchArea"></div>
+  </section>
+
+  <section class="phase" id="phase3">
+    <div class="phase-title"><span class="bar"></span><h2>Listen &amp; Click — Jobs &amp; Careers</h2></div>
+    <p class="phase-sub">Escuchá conversaciones y descripciones sobre trabajos. Elegí la imagen correcta.</p>
+    <div class="listen-click-panel" id="listenClickPanel"></div>
+  </section>
+
+  <section class="phase" id="phase4">
+    <div class="phase-title"><span class="bar"></span><h2>Listen &amp; Answer — Simple Present</h2></div>
+    <p class="phase-sub">Escuchá la situación y elegí la respuesta correcta.</p>
+    <div class="listen-panel">
+      <div class="listen-count" id="listenCount">Round 1 of 10</div>
+      <div class="context-card" id="listenContext"></div>
+      <button class="big-speak pulsing" id="bigSpeakBtn">🔊</button>
+      <div class="listen-question" id="listenQuestion"></div>
+      <div class="listen-options" id="listenOptions"></div>
+      <div class="listen-footer">
+        <div class="score-pill">✅ Aciertos: <span id="listenCorrect">0</span> &nbsp;|&nbsp; ❌ Fallos: <span id="listenWrong">0</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="phase" id="phase5">
+    <div class="phase-title"><span class="bar"></span><h2>Fill the Blank — Simple Present &amp; Verb + Infinitive</h2></div>
+    <p class="phase-sub">Completá cada oración con la forma correcta del verbo.</p>
+    <div class="fb-progress"><div class="fb-progress-inner" id="fbProgress"></div></div>
+    <div id="fbArea"></div>
+  </section>
+
+  <section class="phase" id="phase6">
+    <div class="phase-title"><span class="bar"></span><h2>Speech Practice — Pronunciación</h2></div>
+    <p class="phase-sub">Practicá la pronunciación de frases sobre trabajos y carreras.</p>
+    <div class="sp-wrap" id="spArea"></div>
+  </section>
+
+  <section class="phase" id="phase7">
+    <div class="phase-title"><span class="bar"></span><h2>Reading Comprehension — 21st-Century Jobs</h2></div>
+    <p class="phase-sub">Leé el pasaje y respondé las 5 preguntas. 80% requerido para pasar.</p>
+    <div class="read-panel" id="readPanel"></div>
+  </section>
+
+  <section class="phase" id="phase8">
+    <div class="phase-title"><span class="bar"></span><h2>Final Note — Nota Final</h2></div>
+    <p class="phase-sub">Tu puntaje final de la Unidad 2. Mínimo 80% para aprobar.</p>
+    <div class="final-wrap" id="finalArea"></div>
+  </section>
+</main>
+
+<footer class="bottom">💼 Unit 2 · <span>Your Job Future</span></footer>
+
+<script>
+// ============================================================
+// SVG ICONS (Job & Career Theme - emoji-based)
+// ============================================================
+function emojiSVG(emoji, bg) {
+  const color = bg || '#eaf4fc';
+  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" fill="${color}"/><text x="100" y="135" text-anchor="middle" font-size="110" font-family="Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, sans-serif">${emoji}</text></svg>`;
+}
+
+const SVG_ICONS = {
+  jobSatisfaction: emojiSVG('😊'),
+  career: emojiSVG('🎯'),
+  salary: emojiSVG('💰'),
+  employee: emojiSVG('👔'),
+  employer: emojiSVG('🏢'),
+  interview: emojiSVG('🤝'),
+  resume: emojiSVG('📄'),
+  promotion: emojiSVG('⬆️'),
+  colleague: emojiSVG('👥'),
+  skill: emojiSVG('⭐'),
+  passion: emojiSVG('❤️'),
+  dreamJob: emojiSVG('🌟'),
+  remoteWork: emojiSVG('💻'),
+  freelancer: emojiSVG('🖥️'),
+  teamwork: emojiSVG('🤝'),
+  deadline: emojiSVG('⏰'),
+  office: emojiSVG('🏢'),
+  manager: emojiSVG('👨‍💼'),
+  motivation: emojiSVG('💡'),
+  achievement: emojiSVG('🏆')
+};
+
+// ============================================================
+// VOCABULARY — 20 palabras (Unidad 2)
+// ============================================================
+const CORE_WORDS = [
+  { word:'Job Satisfaction', spanish:'Satisfacción laboral', svgKey:'jobSatisfaction', structure:'Job satisfaction', sentence:'Job satisfaction makes employees happy.' },
+  { word:'Career', spanish:'Carrera profesional', svgKey:'career', structure:'A career', sentence:'She has a career in technology.' },
+  { word:'Salary', spanish:'Salario', svgKey:'salary', structure:'The salary', sentence:'The salary is competitive at this company.' },
+  { word:'Employee', spanish:'Empleado/a', svgKey:'employee', structure:'An employee', sentence:'The employee works remotely from home.' },
+  { word:'Employer', spanish:'Empleador/a', svgKey:'employer', structure:'The employer', sentence:'The employer offers training programs.' },
+  { word:'Interview', spanish:'Entrevista', svgKey:'interview', structure:'A job interview', sentence:'She has a job interview today at 10 AM.' },
+  { word:'Resume', spanish:'Currículum', svgKey:'resume', structure:'The resume', sentence:'He updates his resume every year.' },
+  { word:'Promotion', spanish:'Ascenso', svgKey:'promotion', structure:'A promotion', sentence:'He got a promotion last month.' },
+  { word:'Colleague', spanish:'Colega', svgKey:'colleague', structure:'My colleague', sentence:'My colleague speaks three languages.' },
+  { word:'Skill', spanish:'Habilidad', svgKey:'skill', structure:'A skill', sentence:'Programming is a valuable skill.' },
+  { word:'Passion', spanish:'Pasión', svgKey:'passion', structure:'A passion', sentence:'She has a passion for design.' },
+  { word:'Dream Job', spanish:'Trabajo soñado', svgKey:'dreamJob', structure:'The dream job', sentence:'Teaching is my dream job.' },
+  { word:'Remote Work', spanish:'Trabajo remoto', svgKey:'remoteWork', structure:'Remote work', sentence:'Remote work is popular in the 21st century.' },
+  { word:'Freelancer', spanish:'Freelancer', svgKey:'freelancer', structure:'A freelancer', sentence:'He works as a freelancer for many clients.' },
+  { word:'Teamwork', spanish:'Trabajo en equipo', svgKey:'teamwork', structure:'Teamwork', sentence:'Teamwork improves results at the office.' },
+  { word:'Deadline', spanish:'Fecha límite', svgKey:'deadline', structure:'The deadline', sentence:'The deadline is on Friday at noon.' },
+  { word:'Office', spanish:'Oficina', svgKey:'office', structure:'The office', sentence:'The office opens at 9 AM every day.' },
+  { word:'Manager', spanish:'Gerente', svgKey:'manager', structure:'The manager', sentence:'My manager supports my ideas.' },
+  { word:'Motivation', spanish:'Motivación', svgKey:'motivation', structure:'Motivation', sentence:'Motivation drives success at work.' },
+  { word:'Achievement', spanish:'Logro', svgKey:'achievement', structure:'An achievement', sentence:'She celebrates every achievement in her career.' }
+];
+
+// ============================================================
+// MATCH PAIRS
+// ============================================================
+const MATCH_PAIRS = [
+  { word: 'Job Satisfaction', definition: 'The feeling of being happy and fulfilled at work' },
+  { word: 'Career', definition: 'The series of jobs a person does over their life' },
+  { word: 'Salary', definition: 'The money a person receives for their work' },
+  { word: 'Employee', definition: 'A person who works for a company' },
+  { word: 'Employer', definition: 'A person or company that hires workers' },
+  { word: 'Interview', definition: 'A formal meeting to get a job' },
+  { word: 'Resume', definition: 'A document listing a person\'s education and work experience' },
+  { word: 'Promotion', definition: 'A move to a higher position at work' },
+  { word: 'Colleague', definition: 'A person who works with you' },
+  { word: 'Skill', definition: 'An ability to do something well' },
+  { word: 'Passion', definition: 'A strong feeling of love or enthusiasm for something' },
+  { word: 'Dream Job', definition: 'The job you really want to have' },
+  { word: 'Remote Work', definition: 'Working from home or away from the office' },
+  { word: 'Freelancer', definition: 'A person who works independently for different clients' },
+  { word: 'Teamwork', definition: 'Working together with others to achieve a goal' },
+  { word: 'Deadline', definition: 'The time by which something must be finished' },
+  { word: 'Office', definition: 'A place where people work at desks' },
+  { word: 'Manager', definition: 'A person who leads a team at work' },
+  { word: 'Motivation', definition: 'The reason and energy to do something' },
+  { word: 'Achievement', definition: 'Something good you have done successfully' }
+];
+
+// ============================================================
+// LISTEN & CLICK (10 rounds)
+// ============================================================
+const LC_ROUNDS = [
+  {
+    type: 'conversation',
+    context: '💬 INTERVIEW — First Meeting',
+    audio: 'Woman: Hello, I have an interview at 10 AM. Man: Welcome! Please have a seat.',
+    question: 'What does the woman have today?',
+    options: [
+      { text: 'An interview', svgKey: 'interview' },
+      { text: 'A promotion', svgKey: 'promotion' },
+      { text: 'A salary', svgKey: 'salary' },
+      { text: 'A resume', svgKey: 'resume' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'description',
+    context: '📋 WORK STYLE — Description',
+    audio: 'This person works independently for many different clients and chooses their own schedule.',
+    question: 'What kind of worker is being described?',
+    options: [
+      { text: 'A freelancer', svgKey: 'freelancer' },
+      { text: 'A manager', svgKey: 'manager' },
+      { text: 'An employee', svgKey: 'employee' },
+      { text: 'An employer', svgKey: 'employer' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'conversation',
+    context: '💬 SALARY — Payday',
+    audio: 'Man: My salary is good this year. Woman: That is great news! You work hard.',
+    question: 'What is good this year?',
+    options: [
+      { text: 'The salary', svgKey: 'salary' },
+      { text: 'The office', svgKey: 'office' },
+      { text: 'The deadline', svgKey: 'deadline' },
+      { text: 'The interview', svgKey: 'interview' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'description',
+    context: '📋 WORKPLACE — Description',
+    audio: 'This way of working lets people stay at home and use their computer to do their job.',
+    question: 'What is being described?',
+    options: [
+      { text: 'Remote work', svgKey: 'remoteWork' },
+      { text: 'Teamwork', svgKey: 'teamwork' },
+      { text: 'An office', svgKey: 'office' },
+      { text: 'A career', svgKey: 'career' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'conversation',
+    context: '💬 PROMOTION — Good News',
+    audio: 'Manager: Congratulations! You have a promotion. Employee: Thank you! I am very happy.',
+    question: 'What does the employee get?',
+    options: [
+      { text: 'A promotion', svgKey: 'promotion' },
+      { text: 'A salary cut', svgKey: 'salary' },
+      { text: 'A new resume', svgKey: 'resume' },
+      { text: 'A vacation', svgKey: 'office' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'description',
+    context: '📋 SKILLS — Description',
+    audio: 'This is the ability to do something well. For example, programming or speaking a language.',
+    question: 'What is being described?',
+    options: [
+      { text: 'A skill', svgKey: 'skill' },
+      { text: 'A passion', svgKey: 'passion' },
+      { text: 'A career', svgKey: 'career' },
+      { text: 'A deadline', svgKey: 'deadline' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'conversation',
+    context: '💬 DEADLINE — Work Pressure',
+    audio: 'Manager: The deadline is on Friday. Employee: I need to finish the report by then.',
+    question: 'When is the deadline?',
+    options: [
+      { text: 'On Friday', svgKey: 'deadline' },
+      { text: 'On Monday', svgKey: 'deadline' },
+      { text: 'On Sunday', svgKey: 'deadline' },
+      { text: 'On Wednesday', svgKey: 'deadline' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'description',
+    context: '📋 CAREER — Description',
+    audio: 'This is the job you really want. It makes you happy and fulfilled.',
+    question: 'What is being described?',
+    options: [
+      { text: 'A dream job', svgKey: 'dreamJob' },
+      { text: 'A salary', svgKey: 'salary' },
+      { text: 'An office', svgKey: 'office' },
+      { text: 'A deadline', svgKey: 'deadline' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'conversation',
+    context: '💬 MOTIVATION — Team Meeting',
+    audio: 'Manager: Your motivation is excellent! Employee: Thank you. I love my work.',
+    question: 'What is excellent?',
+    options: [
+      { text: 'The motivation', svgKey: 'motivation' },
+      { text: 'The salary', svgKey: 'salary' },
+      { text: 'The resume', svgKey: 'resume' },
+      { text: 'The office', svgKey: 'office' }
+    ],
+    answerIndex: 0
+  },
+  {
+    type: 'description',
+    context: '📋 ACHIEVEMENT — Description',
+    audio: 'This is something good you have done successfully. People celebrate it at work.',
+    question: 'What is being described?',
+    options: [
+      { text: 'An achievement', svgKey: 'achievement' },
+      { text: 'A mistake', svgKey: 'deadline' },
+      { text: 'A problem', svgKey: 'interview' },
+      { text: 'A break', svgKey: 'office' }
+    ],
+    answerIndex: 0
+  }
+];
+
+// ============================================================
+// LISTEN & ANSWER (Simple Present focus)
+// ============================================================
+const LISTEN_POOL = [
+  { 
+    context: 'SIMPLE PRESENT — Work', 
+    audio: 'She works at a tech company.',
+    question: 'Where does she work?',
+    options: ['At a tech company', 'At a bank', 'At a school', 'At a hospital'],
+    answerIndex: 0
+  },
+  { 
+    context: 'VERB + INFINITIVE — Ambition', 
+    audio: 'He wants to become a manager.',
+    question: 'What does he want to become?',
+    options: ['A manager', 'A teacher', 'A doctor', 'A pilot'],
+    answerIndex: 0
+  },
+  { 
+    context: 'SIMPLE PRESENT — Schedule', 
+    audio: 'They start work at nine AM.',
+    question: 'When do they start work?',
+    options: ['At nine AM', 'At eight AM', 'At ten AM', 'At noon'],
+    answerIndex: 0
+  },
+  { 
+    context: 'SIMPLE PRESENT — Support', 
+    audio: 'My manager supports my ideas.',
+    question: 'Who supports your ideas?',
+    options: ['My manager', 'My colleague', 'My employer', 'My freelancer'],
+    answerIndex: 0
+  },
+  { 
+    context: 'VERB + INFINITIVE — Task', 
+    audio: 'I need to finish this report.',
+    question: 'What do I need to do?',
+    options: ['Finish the report', 'Start the report', 'Read the report', 'Delete the report'],
+    answerIndex: 0
+  },
+  { 
+    context: 'SIMPLE PRESENT — Passion', 
+    audio: 'She has a passion for design.',
+    question: 'What does she have a passion for?',
+    options: ['Design', 'Music', 'Sports', 'Cooking'],
+    answerIndex: 0
+  },
+  { 
+    context: 'SIMPLE PRESENT — Remote Work', 
+    audio: 'The team works remotely on Fridays.',
+    question: 'When does the team work remotely?',
+    options: ['On Fridays', 'On Mondays', 'On Sundays', 'On Wednesdays'],
+    answerIndex: 0
+  },
+  { 
+    context: 'SIMPLE PRESENT — Frequency', 
+    audio: 'He gets a promotion every two years.',
+    question: 'How often does he get a promotion?',
+    options: ['Every two years', 'Every year', 'Every six months', 'Every month'],
+    answerIndex: 0
+  },
+  { 
+    context: 'VERB + INFINITIVE — Plan', 
+    audio: 'We plan to learn new skills.',
+    question: 'What do we plan to do?',
+    options: ['Learn new skills', 'Change jobs', 'Take a break', 'Start a business'],
+    answerIndex: 0
+  },
+  { 
+    context: 'SIMPLE PRESENT — Deadline', 
+    audio: 'The deadline is on Friday.',
+    question: 'When is the deadline?',
+    options: ['On Friday', 'On Monday', 'On Sunday', 'On Tuesday'],
+    answerIndex: 0
+  }
+];
+
+// ============================================================
+// FILL THE BLANK — Simple Present & Verb + Infinitive
+// ============================================================
+const FILL_BLANK = [
+  { prefix:'She', gap:'_____', suffix:'at a tech company.', options:['works','work','is working','working'], answer:'works', tense:'Simple Present' },
+  { prefix:'He', gap:'_____', suffix:'to become a manager.', options:['wants','want','is wanting','wanting'], answer:'wants', tense:'Verb + Infinitive' },
+  { prefix:'They', gap:'_____', suffix:'work at 9 AM.', options:['start','starts','is starting','starting'], answer:'start', tense:'Simple Present' },
+  { prefix:'My manager', gap:'_____', suffix:'my ideas.', options:['supports','support','is supporting','supporting'], answer:'supports', tense:'Simple Present' },
+  { prefix:'I', gap:'_____', suffix:'to finish this report.', options:['need','needs','am needing','needing'], answer:'need', tense:'Verb + Infinitive' },
+  { prefix:'She', gap:'_____', suffix:'a passion for design.', options:['has','have','is having','having'], answer:'has', tense:'Simple Present' },
+  { prefix:'The team', gap:'_____', suffix:'remotely on Fridays.', options:['works','work','is working','working'], answer:'works', tense:'Simple Present' },
+  { prefix:'He', gap:'_____', suffix:'a promotion every two years.', options:['gets','get','is getting','getting'], answer:'gets', tense:'Simple Present' },
+  { prefix:'We', gap:'_____', suffix:'to learn new skills.', options:['plan','plans','is planning','planning'], answer:'plan', tense:'Verb + Infinitive' },
+  { prefix:'The deadline', gap:'_____', suffix:'on Friday.', options:['is','are','be','been'], answer:'is', tense:'Simple Present' },
+  { prefix:'She', gap:'_____', suffix:'to work remotely.', options:['wants','want','is wanting','wanting'], answer:'wants', tense:'Verb + Infinitive' },
+  { prefix:'The office', gap:'_____', suffix:'at 9 AM.', options:['opens','open','is opening','opening'], answer:'opens', tense:'Simple Present' },
+  { prefix:'I', gap:'_____', suffix:'to update my resume.', options:['need','needs','am needing','needing'], answer:'need', tense:'Verb + Infinitive' },
+  { prefix:'The manager', gap:'_____', suffix:'the team every morning.', options:['meets','meet','is meeting','meeting'], answer:'meets', tense:'Simple Present' },
+  { prefix:'They', gap:'_____', suffix:'to improve their skills.', options:['try','tries','is trying','trying'], answer:'try', tense:'Verb + Infinitive' }
+];
+
+// ============================================================
+// SPEECH PRACTICE
+// ============================================================
+const SPEECH_PRACTICE = [
+  'She works at a tech company.',
+  'He wants to become a manager.',
+  'They start work at nine AM.',
+  'My manager supports my ideas.',
+  'I need to finish this report.',
+  'She has a passion for design.',
+  'The team works remotely on Fridays.',
+  'We plan to learn new skills.',
+  'He decided to start his own business.',
+  'The deadline is on Friday.'
+];
+
+// ============================================================
+// READING — 21st-Century Jobs
+// ============================================================
+const READING_PASSAGE = `Many people want to find their dream job. In the 21st century, careers change quickly. Job satisfaction is important — employees want to feel happy at work. Some people work as freelancers and choose their own schedule. Others prefer teamwork in a traditional office. A manager supports the team and helps them meet deadlines. Good skills are valuable, but passion and motivation matter too. When you prepare for an interview, you need to update your resume and practice your answers. If you want to succeed, you must plan to learn new things every day. Your career is a journey, not a destination.`;
+
+const READING_QUESTIONS = [
+  { 
+    q: 'What is important for employees in the 21st century?', 
+    options: ['Job satisfaction', 'A longer weekend', 'Free coffee', 'A bigger office'], 
+    answer: 0 
+  },
+  { 
+    q: 'Who chooses their own schedule?', 
+    options: ['Freelancers', 'Managers', 'Employees', 'Employers'], 
+    answer: 0 
+  },
+  { 
+    q: 'What does a manager do?', 
+    options: ['Supports the team and helps them meet deadlines', 'Cleans the office', 'Writes the resumes', 'Takes interviews'], 
+    answer: 0 
+  },
+  { 
+    q: 'What do you need to do before an interview?', 
+    options: ['Update your resume and practice answers', 'Buy new clothes', 'Call the manager', 'Take a vacation'], 
+    answer: 0 
+  },
+  { 
+    q: 'What must you do to succeed?', 
+    options: ['Plan to learn new things every day', 'Work only on Mondays', 'Avoid teamwork', 'Skip the interview'], 
+    answer: 0 
+  }
+];
+
+// ============================================================
+// STATE & UTILS
+// ============================================================
+let wordStatus = {}, wordIndex = 0, stepIndex = 1, wordsDone = new Array(CORE_WORDS.length).fill(false);
+let matchPairs = [], matchIndex = 0, matchCorrect = 0, matchWrong = 0;
+let lcRounds = [], lcIndex = 0, lcCorrect = 0, lcWrong = 0, lcAnswered = false;
+let listenRounds = [], listenIndex = 0, listenCorrect = 0, listenWrong = 0, listenAnswered = false;
+let fbIndex = 0, fbScore = 0, fbWrong = 0, fbOptionsCache = [];
+let spIndex = 0, spScore = 0, spWrong = 0, recognizing = false;
+let readIndex = 0, readCorrect = 0, readWrong = 0, readAnswered = false;
+
+function speak(text){
+  if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.7; u.pitch = 1;
+  const voices = window.speechSynthesis.getVoices();
+  const enVoice = voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang && v.lang.startsWith('en'));
+  if(enVoice) u.voice = enVoice;
+  window.speechSynthesis.speak(u);
+}
+window.speechSynthesis && window.speechSynthesis.getVoices();
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){ const j = Math.floor(Math.random()*(i+1)); [a[i],a[j]] = [a[j],a[i]]; }
+  return a;
+}
+function normalize(str){ return str.toLowerCase().replace(/[^a-z0-9\s]/g,'').split(/\s+/).filter(Boolean); }
+function matchScore(target, heard){
+  const t = normalize(target); const h = new Set(normalize(heard));
+  let hits = 0; t.forEach(w => { if(h.has(w)) hits++; });
+  return t.length ? hits / t.length : 0;
+}
+function playDing(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [880, 1320].forEach((freq, i)=>{
+      const osc = ctx.createOscillator(), gain = ctx.createGain();
+      osc.type = 'sine'; osc.frequency.value = freq;
+      const start = ctx.currentTime + i*0.09;
+      gain.gain.setValueAtTime(0.0001, start);
+      gain.gain.exponentialRampToValueAtTime(0.2, start+0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, start+0.25);
+      osc.connect(gain).connect(ctx.destination); osc.start(start); osc.stop(start+0.28);
+    });
+  }catch(e){}
+}
+function playBuzz(){
+  try{
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator(), gain = ctx.createGain();
+    osc.type = 'sawtooth'; osc.frequency.value = 130;
+    const start = ctx.currentTime;
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.15, start+0.03);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start+0.35);
+    osc.connect(gain).connect(ctx.destination); osc.start(start); osc.stop(start+0.38);
+  }catch(e){}
+}
+
+const phaseBtns = document.querySelectorAll('.phase-btn');
+const phases = document.querySelectorAll('.phase');
+function goToPhase(n){
+  phases.forEach(p => p.classList.remove('active'));
+  phaseBtns.forEach(b => b.classList.remove('active'));
+  document.getElementById('phase'+n).classList.add('active');
+  document.querySelector(`.phase-btn[data-phase="${n}"]`).classList.add('active');
+  document.getElementById('topProgress').style.width = (n/8*100)+'%';
+  window.scrollTo({top:0, behavior:'smooth'});
+  if(n == 8) renderFinalNote();
+}
+phaseBtns.forEach(btn=>{ btn.addEventListener('click', ()=> goToPhase(parseInt(btn.dataset.phase))); });
+
+// ============================================================
+// SECTION 1: CORE WORDS
+// ============================================================
+function buildWordDots(){
+  const dots = document.getElementById('wordDots');
+  dots.innerHTML = CORE_WORDS.map((w,i)=>{
+    const status = wordStatus[w.word] || { correct:0, wrong:0 };
+    let cls = 'word-dot';
+    if(i === wordIndex) cls += ' active';
+    if(wordsDone[i]){ cls += status.wrong > 0 ? ' failed' : ' done'; }
+    return `<div class="${cls}" data-i="${i}">${i+1}</div>`;
+  }).join('');
+  dots.querySelectorAll('.word-dot').forEach(d=>{
+    d.addEventListener('click', ()=>{ wordIndex = parseInt(d.dataset.i); stepIndex = 1; renderStepper(); });
+  });
+  updateWordStats();
+}
+function updateWordStats(){
+  let c=0,w=0;
+  CORE_WORDS.forEach((item, i)=>{
+    const status = wordStatus[item.word] || { correct:0, wrong:0 };
+    if(wordsDone[i]){ c += status.correct || 0; w += status.wrong || 0; }
+  });
+  document.getElementById('wordCorrect').textContent = c;
+  document.getElementById('wordWrong').textContent = w;
+}
+function renderStepper(){
+  const w = CORE_WORDS[wordIndex];
+  document.getElementById('stepImage').innerHTML = SVG_ICONS[w.svgKey];
+  ['tag1','tag2','tag3'].forEach((id,i)=>{ document.getElementById(id).classList.toggle('on', i+1 === stepIndex); });
+  let text = '', hint = '';
+  if(stepIndex === 1){ text = w.word; hint = 'STEP 1 — LEARN THE WORD'; }
+  if(stepIndex === 2){ text = w.structure; hint = 'STEP 2 — STRUCTURE'; }
+  if(stepIndex === 3){ text = w.sentence; hint = 'STEP 3 — SENTENCE IN CONTEXT'; }
+  document.getElementById('stepText').textContent = text;
+  document.getElementById('stepHint').textContent = hint;
+  document.getElementById('stepSpeakBtn').onclick = ()=> speak(text);
+  document.getElementById('prevStepBtn').disabled = (wordIndex===0 && stepIndex===1);
+  const micBtn = document.getElementById('stepMicBtn');
+  const transcriptEl = document.getElementById('stepTranscript');
+  const feedbackEl = document.getElementById('stepFeedback');
+  if(stepIndex === 1 || stepIndex === 3){
+    micBtn.style.display = 'inline-flex';
+    micBtn.onclick = ()=> requestStepMic(text, w.word);
+  } else { micBtn.style.display = 'none'; }
+  transcriptEl.textContent = ''; feedbackEl.textContent = ''; feedbackEl.className = 'sp-feedback';
+  const nextBtn = document.getElementById('nextStepBtn');
+  if(stepIndex < 3){ nextBtn.textContent = 'Next →'; }
+  else if(wordIndex < CORE_WORDS.length - 1){ nextBtn.textContent = 'Next Word →'; }
+  else { nextBtn.textContent = 'Finish Section ✓'; }
+  buildWordDots(); speak(text);
+}
+
+let stepRecognizing = false;
+const SpeechRecognitionAPI = window.SpeechRecognition || window.webkitSpeechRecognition;
+function requestStepMic(target, word){
+  const transcriptEl = document.getElementById('stepTranscript');
+  const feedbackEl = document.getElementById('stepFeedback');
+  transcriptEl.textContent = ''; feedbackEl.textContent = ''; feedbackEl.className = 'sp-feedback';
+  if(!SpeechRecognitionAPI){ feedbackEl.textContent = '🎙️ Speech recognition not supported.'; feedbackEl.className = 'sp-feedback bad'; return; }
+  if(stepRecognizing) return;
+  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{ stream.getTracks().forEach(t=>t.stop()); startStepRecognition(target, word); })
+      .catch(()=>{ feedbackEl.textContent = '🎙️ Microphone permission required.'; feedbackEl.className = 'sp-feedback bad'; });
+  } else { startStepRecognition(target, word); }
+}
+function startStepRecognition(target, word){
+  const micBtn = document.getElementById('stepMicBtn');
+  const transcriptEl = document.getElementById('stepTranscript');
+  const feedbackEl = document.getElementById('stepFeedback');
+  const rec = new SpeechRecognitionAPI();
+  rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 4;
+  stepRecognizing = true; micBtn.classList.add('listening'); transcriptEl.textContent = 'Listening...';
+  rec.onresult = (event)=>{
+    let bestHeard = event.results[0][0].transcript;
+    let bestScore = matchScore(target, bestHeard);
+    for(let i=1;i<event.results[0].length;i++){ const alt = event.results[0][i].transcript; const s = matchScore(target, alt); if(s > bestScore){ bestScore = s; bestHeard = alt; } }
+    transcriptEl.textContent = `You said: "${bestHeard}"`;
+    const status = wordStatus[word] || { correct:0, wrong:0 };
+    if(bestScore >= 0.4){ status.correct = (status.correct || 0) + 1; feedbackEl.textContent = `✅ Great! You said "${word}" correctly.`; feedbackEl.className = 'sp-feedback ok'; playDing(); }
+    else { status.wrong = (status.wrong || 0) + 1; feedbackEl.textContent = `❌ Try again. Say "${word}" clearly.`; feedbackEl.className = 'sp-feedback bad'; playBuzz(); }
+    wordStatus[word] = status; updateWordStats(); buildWordDots();
+  };
+  rec.onerror = ()=>{ stepRecognizing = false; micBtn.classList.remove('listening'); feedbackEl.textContent = '🎙️ Audio error. Try again.'; feedbackEl.className = 'sp-feedback bad'; };
+  rec.onend = ()=>{ stepRecognizing = false; micBtn.classList.remove('listening'); };
+  rec.start();
+}
+document.getElementById('nextStepBtn').addEventListener('click', ()=>{
+  if(stepIndex < 3){ stepIndex++; }
+  else { wordsDone[wordIndex] = true; if(wordIndex < CORE_WORDS.length - 1){ wordIndex++; stepIndex = 1; } else { goToPhase(2); return; } }
+  renderStepper();
+});
+document.getElementById('prevStepBtn').addEventListener('click', ()=>{
+  if(stepIndex > 1){ stepIndex--; } else if(wordIndex > 0){ wordIndex--; stepIndex = 3; }
+  renderStepper();
+});
+
+// ============================================================
+// SECTION 2: MATCH
+// ============================================================
+function setupMatch(){
+  matchPairs = shuffle(MATCH_PAIRS.map(p => ({...p, matched: false})));
+  matchIndex = 0; matchCorrect = 0; matchWrong = 0; loadMatchRound();
+}
+function loadMatchRound(){
+  const area = document.getElementById('matchArea');
+  const total = MATCH_PAIRS.length;
+  document.getElementById('matchProgress').style.width = (matchIndex/total*100)+'%';
+  if(matchIndex >= total){
+    document.getElementById('matchProgress').style.width = '100%';
+    const totalAnswers = matchCorrect + matchWrong;
+    const pct = totalAnswers > 0 ? Math.round((matchCorrect / totalAnswers) * 100) : 0;
+    const passed = pct >= 80;
+    area.innerHTML = `<div class="fb-card" style="text-align:center;">
+      <div style="font-size:72px;">${passed ? '🥇' : '🔄'}</div>
+      <h3 style="color:${passed ? 'var(--green)' : 'var(--red)'};margin-top:0;">${passed ? '✅ ¡Sección completada!' : '❌ Necesitas 80% para pasar'}</h3>
+      <p style="color:var(--muted);">✅ Aciertos: ${matchCorrect} | ❌ Fallos: ${matchWrong} | 📊 ${pct}%</p>
+      ${passed ? `<button class="nav-btn" id="matchContinueBtn" style="margin-top:16px;">Continuar →</button>` : `<button class="restart-btn" id="matchRetryBtn" style="margin-top:16px;">🔄 Repetir la sección</button>`}
+    </div>`;
+    if(passed){ document.getElementById('matchContinueBtn').onclick = ()=> goToPhase(3); }
+    else { document.getElementById('matchRetryBtn').onclick = ()=> setupMatch(); }
+    return;
+  }
+  const start = matchIndex; const end = Math.min(matchIndex + 3, total);
+  const roundPairs = matchPairs.slice(start, end); const remaining = total - end;
+  const words = shuffle(roundPairs.map(p => p.word));
+  const defs = shuffle(roundPairs.map(p => p.definition));
+  area.innerHTML = `
+    <div class="fb-card">
+      <div class="fb-top">
+        <div class="fb-num">PAIR ${matchIndex+1}-${end} / ${total}</div>
+        <div class="fb-score">✅ ${matchCorrect} | ❌ ${matchWrong}</div>
+      </div>
+      <p style="color:var(--muted);font-size:13px;margin-bottom:12px;">Match each job term with its definition.</p>
+      <div class="match-grid" id="matchGrid">
+        ${words.map(w => `<div class="match-item word-item" data-type="word" data-value="${w}"><span class="m-icon">📝</span> ${w}</div>`).join('')}
+        ${defs.map(d => `<div class="match-item def-item" data-type="def" data-value="${d}"><span class="m-icon">💡</span> ${d}</div>`).join('')}
+      </div>
+      <div class="match-pair-status" id="matchStatus"></div>
+      ${remaining > 0 ? `<button class="nav-btn" id="matchNextBtn" style="margin-top:16px;">Siguiente ronda →</button>` : ''}
+    </div>`;
+  let selected = null; const status = document.getElementById('matchStatus');
+  const items = document.querySelectorAll('.match-item'); let matchedPairs = 0;
+  items.forEach(item => {
+    item.addEventListener('click', function(){
+      if(this.classList.contains('matched')) return;
+      if(!selected){ selected = this; this.classList.add('selected'); return; }
+      if(selected === this){ this.classList.remove('selected'); selected = null; return; }
+      const type1 = selected.dataset.type; const type2 = this.dataset.type;
+      const val1 = selected.dataset.value; const val2 = this.dataset.value;
+      if(type1 === type2){ selected.classList.remove('selected'); selected = this; this.classList.add('selected'); return; }
+      let word, def;
+      if(type1 === 'word'){ word = val1; def = val2; } else { word = val2; def = val1; }
+      const pair = MATCH_PAIRS.find(p => p.word === word && p.definition === def);
+      if(pair){
+        this.classList.add('matched'); selected.classList.add('matched'); selected.classList.remove('selected');
+        matchCorrect++; matchedPairs++; status.textContent = '✅ ¡Correcto!'; status.style.color = 'var(--green)'; playDing(); selected = null;
+        if(matchedPairs === roundPairs.length){
+          status.textContent = `✅ ¡Ronda completa!`;
+          const nextBtn = document.getElementById('matchNextBtn');
+          if(nextBtn) { nextBtn.style.display = 'inline-block'; nextBtn.onclick = ()=>{ matchIndex = end; loadMatchRound(); }; }
+          if(remaining === 0 && matchIndex + 3 >= total){ setTimeout(()=>{ matchIndex = total; loadMatchRound(); }, 1500); }
+        }
+      } else {
+        this.classList.add('wrong-match'); selected.classList.add('wrong-match'); matchWrong++;
+        status.textContent = '❌ Incorrecto. Intenta de nuevo.'; status.style.color = 'var(--red)'; playBuzz();
+        setTimeout(()=>{ this.classList.remove('wrong-match'); selected.classList.remove('wrong-match'); selected.classList.remove('selected'); selected = null; }, 600);
+      }
+    });
+  });
+  if(remaining === 0){
+    const nextBtn = document.getElementById('matchNextBtn');
+    if(nextBtn) { nextBtn.textContent = 'Completar sección ✓'; nextBtn.onclick = ()=>{ matchIndex = total; loadMatchRound(); }; }
+  }
+}
+
+// ============================================================
+// SECTION 3: LISTEN & CLICK
+// ============================================================
+function setupListenClick(){
+  lcRounds = shuffle(LC_ROUNDS); lcIndex = 0; lcCorrect = 0; lcWrong = 0; lcAnswered = false; renderListenClickRound();
+}
+function renderListenClickRound(){
+  const panel = document.getElementById('listenClickPanel'); const total = lcRounds.length;
+  if(lcIndex >= total){
+    const totalAnswers = lcCorrect + lcWrong; const pct = totalAnswers > 0 ? Math.round((lcCorrect / totalAnswers) * 100) : 0; const passed = pct >= 80;
+    panel.innerHTML = `
+      <div class="lc-complete ${passed ? 'pass' : 'fail'}">
+        <div style="font-size:72px;">${passed ? '🥇' : '🔄'}</div>
+        <h3>${passed ? '✅ ¡Sección completada!' : '❌ Necesitas 80% para pasar'}</h3>
+        <div class="score-big">${pct}%</div>
+        <div class="score-sub">✅ Aciertos: ${lcCorrect} &nbsp;|&nbsp; ❌ Fallos: ${lcWrong}</div>
+        ${passed ? `<button class="nav-btn" id="lcContinueBtn" style="margin-top:16px;">Continuar a Listen & Answer →</button>` : `<button class="restart-btn" id="lcRetryBtn">🔄 Repetir la sección</button>`}
+      </div>`;
+    if(passed){ document.getElementById('lcContinueBtn').onclick = ()=> goToPhase(4); } else { document.getElementById('lcRetryBtn').onclick = ()=> setupListenClick(); }
+    return;
+  }
+  lcAnswered = false; const round = lcRounds[lcIndex];
+  const totalAnswers = lcCorrect + lcWrong; const currentPct = totalAnswers > 0 ? Math.round((lcCorrect / totalAnswers) * 100) : 100;
+  panel.innerHTML = `
+    <div class="lc-header">
+      <div class="lc-round">ROUND ${lcIndex + 1} / ${total}</div>
+      <div class="lc-score-box"><span class="good">✅ ${lcCorrect}</span><span class="bad">❌ ${lcWrong}</span><span>📊 ${currentPct}%</span></div>
+    </div>
+    <div class="lc-instruction">${round.type === 'conversation' ? '🎧 Listen to the conversation' : '🎧 Listen to the description'}</div>
+    <div class="lc-subinstruction">${round.context}</div>
+    <button class="lc-big-speak pulsing" id="lcSpeakBtn">🔊</button>
+    <div class="listen-question" style="margin:10px auto 22px;max-width:620px;">
+      <span class="q-tag">❓ Question</span>${round.question}
+    </div>
+    <div class="lc-images lc-images-4" id="lcImages">
+      ${round.options.map((opt, i) => `<div class="lc-img-card" data-i="${i}">${SVG_ICONS[opt.svgKey]}<div class="lc-img-label">${opt.text}</div></div>`).join('')}
+    </div>
+    <div class="lc-feedback" id="lcFeedback"></div>`;
+  const speakAudio = ()=> speak(round.audio);
+  document.getElementById('lcSpeakBtn').onclick = speakAudio; setTimeout(speakAudio, 500);
+  const imgCards = document.querySelectorAll('.lc-img-card');
+  imgCards.forEach(card => {
+    card.addEventListener('click', () => {
+      if(lcAnswered) return; lcAnswered = true;
+      const selectedIdx = parseInt(card.dataset.i); const feedback = document.getElementById('lcFeedback'); const correctText = round.options[round.answerIndex].text;
+      if(selectedIdx === round.answerIndex){
+        card.classList.add('correct'); lcCorrect++; feedback.textContent = `✅ ¡Correcto! "${correctText}"`; feedback.className = 'lc-feedback ok'; playDing();
+        setTimeout(()=>{ lcIndex++; renderListenClickRound(); }, 1400);
+      } else {
+        card.classList.add('wrong'); lcWrong++; feedback.textContent = `❌ Incorrecto. Era "${correctText}"`; feedback.className = 'lc-feedback bad'; playBuzz();
+        imgCards.forEach(c => { if(parseInt(c.dataset.i) === round.answerIndex) c.classList.add('correct'); });
+        setTimeout(()=>{ lcIndex++; renderListenClickRound(); }, 2200);
+      }
+    });
+  });
+}
+
+// ============================================================
+// SECTION 4: LISTEN & ANSWER
+// ============================================================
+function setupListening(){
+  listenRounds = shuffle(LISTEN_POOL); listenIndex = 0; listenCorrect = 0; listenWrong = 0; listenAnswered = false;
+  document.getElementById('listenCorrect').textContent = '0'; document.getElementById('listenWrong').textContent = '0'; loadListenRound();
+}
+function loadListenRound(){
+  if(listenIndex >= listenRounds.length){
+    const totalAnswers = listenCorrect + listenWrong; const pct = totalAnswers > 0 ? Math.round((listenCorrect / totalAnswers) * 100) : 0; const passed = pct >= 80;
+    document.getElementById('listenCount').textContent = 'Section complete!';
+    document.getElementById('bigSpeakBtn').style.display = 'none';
+    document.getElementById('listenContext').style.display = 'none';
+    document.getElementById('listenQuestion').style.display = 'none';
+    document.getElementById('listenOptions').innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:20px;">
+      <div style="font-size:72px;">${passed ? '🥇' : '🔄'}</div>
+      <h3 style="color:${passed ? 'var(--green)' : 'var(--red)'};margin:10px 0;">${passed ? '✅ ¡Sección completada!' : '❌ Necesitas 80% para pasar'}</h3>
+      <p style="color:var(--muted);">✅ Aciertos: ${listenCorrect} | ❌ Fallos: ${listenWrong} | 📊 ${pct}%</p>
+      ${passed ? `<button class="nav-btn" onclick="goToPhase(5)" style="margin-top:12px;">Continuar →</button>` : `<button class="restart-btn" onclick="setupListening()" style="margin-top:12px;">🔄 Repetir la sección</button>`}
+    </div>`;
+    return;
+  }
+  const round = listenRounds[listenIndex];
+  document.getElementById('listenCount').textContent = `Round ${listenIndex+1} of ${listenRounds.length}`;
+  document.getElementById('bigSpeakBtn').style.display = 'inline-flex'; document.getElementById('bigSpeakBtn').classList.add('pulsing');
+  const contextEl = document.getElementById('listenContext'); contextEl.style.display = 'block'; contextEl.innerHTML = `<strong>${round.context}</strong>`;
+  const questionEl = document.getElementById('listenQuestion'); questionEl.style.display = 'block'; questionEl.innerHTML = `<span class="q-tag">❓ Question</span>${round.question}`;
+  listenAnswered = false; const letters = ['A','B','C','D']; const optWrap = document.getElementById('listenOptions');
+  optWrap.innerHTML = round.options.map((opt, i) => `<div class="listen-opt" data-i="${i}"><span class="lo-letter">${letters[i]}</span><span>${opt}</span></div>`).join('');
+  optWrap.querySelectorAll('.listen-opt').forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      if(listenAnswered) return; listenAnswered = true;
+      const chosen = parseInt(opt.dataset.i); const isCorrect = chosen === round.answerIndex;
+      if(isCorrect){
+        opt.classList.add('correct'); listenCorrect++; document.getElementById('listenCorrect').textContent = listenCorrect; playDing();
+        document.getElementById('bigSpeakBtn').classList.remove('pulsing');
+        optWrap.querySelectorAll('.listen-opt').forEach(o=>o.style.pointerEvents='none');
+        setTimeout(()=>{ listenIndex++; loadListenRound(); }, 1400);
+      } else {
+        opt.classList.add('wrong'); listenWrong++; document.getElementById('listenWrong').textContent = listenWrong; playBuzz();
+        optWrap.querySelectorAll('.listen-opt').forEach(o=>{ if(parseInt(o.dataset.i) === round.answerIndex) o.classList.add('correct'); o.style.pointerEvents='none'; });
+        setTimeout(()=>{ listenIndex++; loadListenRound(); }, 2000);
+      }
+    });
+  });
+  document.getElementById('bigSpeakBtn').onclick = ()=> speak(round.audio); setTimeout(()=> speak(round.audio), 500);
+}
+
+// ============================================================
+// SECTION 5: FILL THE BLANK
+// ============================================================
+function setupFillBlank(){
+  fbIndex = 0; fbScore = 0; fbWrong = 0; fbOptionsCache = FILL_BLANK.map(q => shuffle(q.options)); loadFillBlank();
+}
+function loadFillBlank(){
+  const area = document.getElementById('fbArea'); document.getElementById('fbProgress').style.width = (fbIndex/FILL_BLANK.length*100)+'%';
+  if(fbIndex >= FILL_BLANK.length){
+    document.getElementById('fbProgress').style.width = '100%';
+    const totalAnswers = fbScore + fbWrong; const pct = totalAnswers > 0 ? Math.round((fbScore / totalAnswers) * 100) : 0; const passed = pct >= 80;
+    area.innerHTML = `<div class="fb-card" style="text-align:center;">
+      <div style="font-size:72px;">${passed ? '🥇' : '🔄'}</div>
+      <h3 style="color:${passed ? 'var(--green)' : 'var(--red)'};margin-top:0;">${passed ? '✅ ¡Sección completada!' : '❌ Necesitas 80% para pasar'}</h3>
+      <p style="color:var(--muted);">✅ Aciertos: ${fbScore} | ❌ Fallos: ${fbWrong} | 📊 ${pct}%</p>
+      ${passed ? `<button class="nav-btn" onclick="goToPhase(6)" style="margin-top:16px;">Continuar →</button>` : `<button class="restart-btn" onclick="setupFillBlank()" style="margin-top:16px;">🔄 Repetir la sección</button>`}
+    </div>`;
+    return;
+  }
+  const q = FILL_BLANK[fbIndex]; const opts = fbOptionsCache[fbIndex]; const tenseTag = q.tense ? `<span class="tense-tag">${q.tense}</span>` : '';
+  area.innerHTML = `
+    <div class="fb-card">
+      <div class="fb-top">
+        <div class="fb-num">QUESTION ${fbIndex+1} / ${FILL_BLANK.length}</div>
+        <div class="fb-score">✅ ${fbScore} | ❌ ${fbWrong}</div>
+      </div>
+      <div class="fb-sentence">
+        ${q.prefix} <span class="gap">${q.gap}</span> ${q.suffix} ${tenseTag}
+      </div>
+      <div class="fb-choices" id="fbChoices">
+        ${opts.map(op => `<div class="fb-choice" data-val="${op}">${op}</div>`).join('')}
+      </div>
+      <div class="fb-feedback" id="fbFeedback"></div>
+    </div>`;
+  const choices = document.querySelectorAll('#fbChoices .fb-choice'); let solved = false;
+  choices.forEach(c=>{
+    c.addEventListener('click', ()=>{
+      if(solved) return; const val = c.dataset.val; const feedback = document.getElementById('fbFeedback');
+      if(val === q.answer){
+        solved = true; c.classList.add('correct'); choices.forEach(cc=>{ cc.style.pointerEvents = 'none'; }); fbScore++;
+        feedback.textContent = '✅ Correct!'; feedback.className = 'fb-feedback ok'; playDing();
+        setTimeout(()=>{ fbIndex++; loadFillBlank(); }, 1200);
+      } else {
+        c.classList.add('wrong'); fbWrong++; feedback.textContent = '❌ Incorrect.'; feedback.className = 'fb-feedback bad'; playBuzz();
+        setTimeout(()=>{ c.classList.remove('wrong'); }, 500);
+      }
+    });
+  });
+}
+
+// ============================================================
+// SECTION 6: SPEECH PRACTICE
+// ============================================================
+function setupSpeech(){ spIndex = 0; spScore = 0; spWrong = 0; loadSpeechItem(); }
+function loadSpeechItem(){
+  const area = document.getElementById('spArea');
+  if(spIndex >= SPEECH_PRACTICE.length){
+    const totalAnswers = spScore + spWrong; const pct = totalAnswers > 0 ? Math.round((spScore / totalAnswers) * 100) : 0; const passed = pct >= 80;
+    area.innerHTML = `<div class="sp-card">
+      <div style="font-size:72px;">${passed ? '🥇' : '🔄'}</div>
+      <h3 style="color:${passed ? 'var(--green)' : 'var(--red)'};margin-top:0;">${passed ? '✅ ¡Sección completada!' : '❌ Necesitas 80% para pasar'}</h3>
+      <p style="color:var(--muted);">✅ Aciertos: ${spScore} | ❌ Fallos: ${spWrong} | 📊 ${pct}%</p>
+      ${passed ? `<button class="nav-btn" onclick="goToPhase(7)" style="margin-top:16px;">Continuar a Reading →</button>` : `<button class="restart-btn" onclick="setupSpeech()" style="margin-top:16px;">🔄 Repetir la sección</button>`}
+    </div>`;
+    return;
+  }
+  const target = SPEECH_PRACTICE[spIndex];
+  area.innerHTML = `
+    <div class="sp-card">
+      <div class="sp-top">
+        <div class="sp-num">PHRASE ${spIndex+1} / ${SPEECH_PRACTICE.length}</div>
+        <div class="sp-score">✅ ${spScore} | ❌ ${spWrong}</div>
+      </div>
+      <button class="speak-btn big" id="spListenBtn" style="margin:0 auto;">🔊</button>
+      <div class="sp-target">${target}</div>
+      <div class="sp-hint">Presioná el micrófono y hablá claro. Se evalúa palabra por palabra.</div>
+      <div class="sp-controls"><button class="mic-btn" id="micBtn">🎙️</button></div>
+      <div class="sp-transcript" id="spTranscript">&nbsp;</div>
+      <div class="sp-feedback" id="spFeedback">&nbsp;</div>
+      <button class="sp-next" id="spNextBtn">Next →</button>
+      <div id="spUnsupported"></div>
+    </div>`;
+  document.getElementById('spListenBtn').addEventListener('click', ()=> speak(target));
+  if(!SpeechRecognitionAPI){
+    document.getElementById('spUnsupported').innerHTML = `<div class="sp-unsupported">🎙️ Speech recognition not supported. Try Google Chrome.</div>`;
+    document.getElementById('micBtn').disabled = true; document.getElementById('spNextBtn').classList.add('show');
+    document.getElementById('spNextBtn').onclick = ()=>{ spIndex++; loadSpeechItem(); };
+    return;
+  }
+  const micBtn = document.getElementById('micBtn');
+  micBtn.addEventListener('click', ()=>{ if(recognizing) return; requestSpMic(target); });
+}
+function requestSpMic(target){
+  const box = document.getElementById('spUnsupported'); if(box) box.innerHTML = '';
+  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+    navigator.mediaDevices.getUserMedia({audio:true}).then(stream=>{ stream.getTracks().forEach(t=>t.stop()); startSpRecognition(target); })
+      .catch(()=>{ if(box) box.innerHTML = `<div class="sp-unsupported">🎙️ Microphone access blocked.</div>`; });
+  } else { startSpRecognition(target); }
+}
+function startSpRecognition(target){
+  const micBtn = document.getElementById('micBtn');
+  const transcriptEl = document.getElementById('spTranscript');
+  const feedbackEl = document.getElementById('spFeedback');
+  const rec = new SpeechRecognitionAPI();
+  rec.lang = 'en-US'; rec.interimResults = false; rec.maxAlternatives = 4;
+  recognizing = true; micBtn.classList.add('listening'); transcriptEl.textContent = 'Listening...'; feedbackEl.textContent = ''; feedbackEl.className = 'sp-feedback';
+  rec.onresult = (event)=>{
+    let bestHeard = event.results[0][0].transcript;
+    let bestScore = matchScore(target, bestHeard);
+    for(let i=1;i<event.results[0].length;i++){ const alt = event.results[0][i].transcript; const s = matchScore(target, alt); if(s > bestScore){ bestScore = s; bestHeard = alt; } }
+    transcriptEl.textContent = `You said: "${bestHeard}"`;
+    if(bestScore >= 0.4){ spScore++; feedbackEl.textContent = '✅ Great! Clear pronunciation.'; feedbackEl.className = 'sp-feedback ok'; playDing(); }
+    else if(bestScore >= 0.25){ spScore++; feedbackEl.textContent = '👍 Almost! Good attempt, keep practicing.'; feedbackEl.className = 'sp-feedback ok'; playDing(); }
+    else { spWrong++; feedbackEl.textContent = '❌ Try again. Speak slowly and clearly.'; feedbackEl.className = 'sp-feedback bad'; playBuzz(); }
+    document.getElementById('spNextBtn').classList.add('show'); document.getElementById('spNextBtn').onclick = ()=>{ spIndex++; loadSpeechItem(); };
+  };
+  rec.onerror = ()=>{ recognizing = false; micBtn.classList.remove('listening'); };
+  rec.onend = ()=>{ recognizing = false; micBtn.classList.remove('listening'); };
+  rec.start();
+}
+
+// ============================================================
+// SECTION 7: READING
+// ============================================================
+function setupReading(){ readIndex = 0; readCorrect = 0; readWrong = 0; readAnswered = false; renderReadingQuestion(); }
+function renderReadingQuestion(){
+  const panel = document.getElementById('readPanel');
+  if(readIndex >= READING_QUESTIONS.length){
+    const totalAnswers = readCorrect + readWrong; const pct = totalAnswers > 0 ? Math.round((readCorrect / totalAnswers) * 100) : 0; const passed = pct >= 80;
+    panel.innerHTML = `
+      <div class="lc-complete ${passed ? 'pass' : 'fail'}">
+        <div style="font-size:72px;">${passed ? '🥇' : '🔄'}</div>
+        <h3>${passed ? '✅ ¡Reading completado!' : '❌ Necesitas 80% para pasar'}</h3>
+        <div class="score-big">${pct}%</div>
+        <div class="score-sub">✅ Aciertos: ${readCorrect} &nbsp;|&nbsp; ❌ Fallos: ${readWrong}</div>
+        ${passed ? `<button class="nav-btn" onclick="goToPhase(8)" style="margin-top:16px;">Ver Nota Final →</button>` : `<button class="restart-btn" onclick="setupReading()" style="margin-top:16px;">🔄 Repetir la sección</button>`}
+      </div>`;
+    return;
+  }
+  const totalAnswers = readCorrect + readWrong; const currentPct = totalAnswers > 0 ? Math.round((readCorrect / totalAnswers) * 100) : 100; const q = READING_QUESTIONS[readIndex];
+  panel.innerHTML = `
+    <div class="read-score-bar">
+      <span>READING · Pregunta ${readIndex+1} / ${READING_QUESTIONS.length}</span>
+      <span><span class="good">✅ ${readCorrect}</span> &nbsp; <span class="bad">❌ ${readWrong}</span> &nbsp; 📊 ${currentPct}%</span>
+    </div>
+    <div class="read-passage">${READING_PASSAGE}</div>
+    <div class="read-q">
+      <div class="read-q-text">${readIndex+1}. ${q.q}</div>
+      <div class="read-opts" id="readOpts">
+        ${q.options.map((opt, i) => `<div class="read-opt" data-i="${i}">${opt}</div>`).join('')}
+      </div>
+    </div>`;
+  readAnswered = false;
+  const opts = document.querySelectorAll('.read-opt');
+  opts.forEach(opt=>{
+    opt.addEventListener('click', ()=>{
+      if(readAnswered) return; readAnswered = true;
+      const chosen = parseInt(opt.dataset.i);
+      if(chosen === q.answer){
+        opt.classList.add('correct'); readCorrect++; playDing();
+        opts.forEach(o=>o.classList.add('disabled'));
+        setTimeout(()=>{ readIndex++; renderReadingQuestion(); }, 1200);
+      } else {
+        opt.classList.add('wrong'); readWrong++; playBuzz();
+        opts.forEach(o=>{ if(parseInt(o.dataset.i) === q.answer) o.classList.add('correct'); o.classList.add('disabled'); });
+        setTimeout(()=>{ readIndex++; renderReadingQuestion(); }, 2000);
+      }
+    });
+  });
+}
+
+// ============================================================
+// SECTION 8: FINAL NOTE
+// ============================================================
+function renderFinalNote(){
+  const area = document.getElementById('finalArea');
+  const sections = [
+    { label:'Core Words', pct: calcWordPct() },
+    { label:'Match', pct: calcMatchPct() },
+    { label:'Listen & Click', pct: calcLCPct() },
+    { label:'Listen & Answer', pct: calcListenPct() },
+    { label:'Fill the Blank', pct: calcFBPct() },
+    { label:'Speech', pct: calcSpPct() },
+    { label:'Reading', pct: calcReadPct() }
+  ];
+  const overall = Math.round(sections.reduce((s,x)=>s+x.pct,0)/sections.length);
+  const passed = overall >= 80;
+  area.innerHTML = `
+    <div class="final-card">
+      <div style="font-size:64px;">${passed ? '🏆' : '📚'}</div>
+      <h3>${passed ? '¡Felicitaciones!' : 'Sigue practicando'}</h3>
+      <div class="final-score-big">${overall}%</div>
+      <div class="final-score-sub">Puntaje final de la Unidad 2</div>
+      <div class="final-breakdown">
+        ${sections.map(s => `<div class="fb-row"><div class="fb-label">${s.label}</div><div class="fb-bar-outer"><div class="fb-bar-inner" style="width:${s.pct}%"></div></div><div class="fb-val">${s.pct}%</div></div>`).join('')}
+      </div>
+      <div class="final-message ${passed ? 'pass' : 'fail'}">
+        ${passed 
+          ? '✅ ¡Excelente! Has completado la Unidad 2. Ahora puedes presentar tu "Dream Job" con confianza. Intenta la Opción 1 (Play a job guessing game) o la Opción 2 (Give a presentation about your dream job).'
+          : '💪 Necesitas un 80% para aprobar. Repasá las secciones con menor puntaje y volvé a intentarlo. ¡No te rindas!'}
+      </div>
+      <button class="restart-btn" onclick="restartAll()">🔄 Volver a empezar</button>
+    </div>`;
+}
+function calcWordPct(){ let c=0,t=0; CORE_WORDS.forEach((item,i)=>{ const s = wordStatus[item.word]; if(s){ c += s.correct||0; t += (s.correct||0)+(s.wrong||0); } }); return t>0 ? Math.round(c/t*100) : 0; }
+function calcMatchPct(){ const t = matchCorrect + matchWrong; return t>0 ? Math.round(matchCorrect/t*100) : 0; }
+function calcLCPct(){ const t = lcCorrect + lcWrong; return t>0 ? Math.round(lcCorrect/t*100) : 0; }
+function calcListenPct(){ const t = listenCorrect + listenWrong; return t>0 ? Math.round(listenCorrect/t*100) : 0; }
+function calcFBPct(){ const t = fbScore + fbWrong; return t>0 ? Math.round(fbScore/t*100) : 0; }
+function calcSpPct(){ const t = spScore + spWrong; return t>0 ? Math.round(spScore/t*100) : 0; }
+function calcReadPct(){ const t = readCorrect + readWrong; return t>0 ? Math.round(readCorrect/t*100) : 0; }
+
+function restartAll(){
+  wordStatus = {}; wordIndex = 0; stepIndex = 1; wordsDone = new Array(CORE_WORDS.length).fill(false);
+  matchIndex = 0; matchCorrect = 0; matchWrong = 0;
+  lcIndex = 0; lcCorrect = 0; lcWrong = 0; lcAnswered = false;
+  listenIndex = 0; listenCorrect = 0; listenWrong = 0; listenAnswered = false;
+  fbIndex = 0; fbScore = 0; fbWrong = 0;
+  spIndex = 0; spScore = 0; spWrong = 0;
+  readIndex = 0; readCorrect = 0; readWrong = 0;
+  goToPhase(1); renderStepper();
+}
+
+// ============================================================
+// INIT
+// ============================================================
+document.addEventListener('DOMContentLoaded', ()=>{
+  buildWordDots(); renderStepper();
+  setupMatch(); setupListenClick(); setupListening(); setupFillBlank(); setupSpeech(); setupReading();
+  document.getElementById('topProgress').style.width = '12.5%';
+});
+</script>
+</body>
+</html>
